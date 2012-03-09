@@ -62,9 +62,9 @@
             for ( var i = 0; i < columns; i++ ) {
                 
                 // slice our li list for each column
-                var slidedList = $list.slice(sliceStart, sliceEnd);
+                var slicedList = $list.slice(sliceStart, sliceEnd);
 
-                // find this columns ul, then append a our sliced list items
+                // find this columns ul, then append our sliced list items
                 $('.columnizedList ul:eq(' + i + ')').append(slicedList);
  
                 // up the slice start/end index points
