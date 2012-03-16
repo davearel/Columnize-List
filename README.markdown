@@ -1,9 +1,10 @@
 #what it does
-This plugin allows you to take a single list and break it up into any given number of columns. Also supports nested list items.
+This plugin allows you to take a single html list and break it up into any given number of columns. Also supports nested list items.
 
 #How to use
 HTML:
-```html
+
+``` html
 <ul id="list">
   <li>List Item 1</li>
   <li>List Item 2</li>
@@ -18,10 +19,13 @@ HTML:
 ```
 
 JavaScript:
-```javascript
+
+``` javascript
 jQuery( function ($) {
   $('#list').columnizeList({
-    columns: 2    
+    columns: 2,
+    wrapper_class: 'columnizedList',
+    nested_item_class: 'nestedItem'
   });
 });
 ```
@@ -29,3 +33,4 @@ jQuery( function ($) {
 ## TODO
 - Keep nested lists as actual nested lists instead of using classes.
 - Allow an infinit number of nested lists.
+
