@@ -1,4 +1,4 @@
-(function($){
+(function($, undefined){
     
     $.columnizeList = function(el, options){
         // To avoid scope issues, use 'base' instead of 'this'
@@ -8,6 +8,7 @@
         // Access to jQuery and DOM versions of element
         base.$el = $(el);
         base.el = el;
+        base.wrap = base.$el.parent();
 
         // Add a reverse reference to the DOM object
         base.$el.data("columnizeList", base);
@@ -20,7 +21,7 @@
 
         base.createColumns = function () {
             // create out wrapper div and append it to the parent item
-            var $listwrap = $('<div class="columnizedList" />').appendTo(base.$el.parent());
+            var $listwrap = $('<div class="columnizedList" />').appendTo(base.wrap);
             // create a ul for each column
             for ( var i = 0; i < base.options.columns; i++ ) {
                 $('<ul />').appendTo($listwrap);
@@ -49,6 +50,7 @@
                 $parentLi = $(this).parent('li'),
                 // set nested class on nested li's
                 $nestedItems = $this.find("> li").addClass('nestedItem');
+
                 // append nested li's to parent list
                 $nestedItems.insertAfter($parentLi);
                 // remove any trace of the nested list
@@ -65,7 +67,7 @@
                 var slicedList = $list.slice(sliceStart, sliceEnd);
 
                 // find this columns ul, then append our sliced list items
-                $('.columnizedList ul:eq(' + i + ')').append(slicedList);
+                $('.columnizedList ul:eq(' + i + ')', base.wrap).append(slicedList);
  
                 // up the slice start/end index points
                 sliceEnd += columnLength;
@@ -75,7 +77,7 @@
                 if ( (i + 2) === columns ) {
                     // this will ensure all remaining 
                     // items are appended
-                    sliceEnd = undefined;
+                    sliceEnd = sliceEnd + (length % columnLength);
                 }
             }
             
@@ -98,4 +100,4 @@
         });
     };
 
-})(jQuery);
+})(jQuery)
