@@ -21,7 +21,7 @@
 
         base.createColumns = function () {
             // create out wrapper div and append it to the parent item
-            var $listwrap = $('<div class="columnizedList" />').appendTo(base.wrap);
+            var $listwrap = $('<div class="' + base.options.wrapper_class + '" />').appendTo(base.wrap);
             // create a ul for each column
             for ( var i = 0; i < base.options.columns; i++ ) {
                 $('<ul />').appendTo($listwrap);
@@ -49,7 +49,7 @@
                 $this = $(this),
                 $parentLi = $(this).parent('li'),
                 // set nested class on nested li's
-                $nestedItems = $this.find("> li").addClass('nestedItem');
+                $nestedItems = $this.find("> li").addClass(base.options.nested_item_class);
 
                 // append nested li's to parent list
                 $nestedItems.insertAfter($parentLi);
@@ -67,7 +67,7 @@
                 var slicedList = $list.slice(sliceStart, sliceEnd);
 
                 // find this columns ul, then append our sliced list items
-                $('.columnizedList ul:eq(' + i + ')', base.wrap).append(slicedList);
+                $('.' + base.options.wrapper_class + ' ul:eq(' + i + ')', base.wrap).append(slicedList);
  
                 // up the slice start/end index points
                 sliceEnd += columnLength;
@@ -91,7 +91,9 @@
     };
 
     $.columnizeList.defaultOptions = {
-        columns: 2
+        columns: 2,
+        wrapper_class: 'columnizedList',
+        nested_item_class: 'nestedItem'
     };
 
     $.fn.columnizeList = function(options){
